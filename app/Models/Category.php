@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\CategoryTypeEnum;
+use App\Enums\TransactionTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class Category extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'type' => CategoryTypeEnum::class,
+        'type' => TransactionTypeEnum::class,
     ];
 }

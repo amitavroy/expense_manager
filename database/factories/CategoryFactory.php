@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\CategoryTypeEnum;
+use App\Enums\TransactionTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'type' => $this->faker->randomElement(CategoryTypeEnum::cases()),
+            'type' => $this->faker->randomElement(TransactionTypeEnum::cases()),
             'is_active' => true,
         ];
     }

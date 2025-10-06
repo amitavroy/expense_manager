@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Enums\CategoryTypeEnum;
+use App\Enums\TransactionTypeEnum;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Account;
 use App\Models\Category;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ])->each(function ($category) {
             Category::factory()->create([
                 'name' => $category,
-                'type' => CategoryTypeEnum::EXPENSE,
+                'type' => TransactionTypeEnum::EXPENSE,
             ]);
         });
 
@@ -60,8 +61,38 @@ class DatabaseSeeder extends Seeder
         ])->each(function ($category) {
             Category::factory()->create([
                 'name' => $category,
-                'type' => CategoryTypeEnum::INCOME,
+                'type' => TransactionTypeEnum::INCOME,
             ]);
         });
+
+        collect([
+            [
+                'user_id' => $user->id,
+                'account_id' => 1,
+                'category_id' => 1,
+                'amount' => 500,
+                'description' => 'Dinner with friends',
+                'date' => now(),
+            ],
+            [
+                'user_id' => $user->id,
+                'account_id' => 1,
+                'category_id' => 1,
+                'amount' => 250,
+                'description' => 'Lunch with friends',
+                'date' => now(),
+            ],
+            [
+                'user_id' => $user->id,
+                'account_id' => 1,
+                'category_id' => 2,
+                'amount' => 150,
+                'description' => 'Going to office',
+                'date' => now(),
+            ],
+        ])->each(function ($transaction) {
+            Transaction::create($transaction);
+        });
+
     }
 }
