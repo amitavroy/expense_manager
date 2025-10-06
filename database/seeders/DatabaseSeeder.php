@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Account;
+use App\Enums\CategoryTypeEnum;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Account;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -34,6 +36,31 @@ class DatabaseSeeder extends Seeder
             Account::factory()->create([
                 'user_id' => $user->id,
                 'name' => $account,
+            ]);
+        });
+
+        collect([
+            'Food',
+            'Transport',
+            'Rent',
+            'Bills',
+            'Entertainment',
+            'Other',
+        ])->each(function ($category) {
+            Category::factory()->create([
+                'name' => $category,
+                'type' => CategoryTypeEnum::EXPENSE,
+            ]);
+        });
+
+        collect([
+            'Salary',
+            'Freelance',
+            'Other',
+        ])->each(function ($category) {
+            Category::factory()->create([
+                'name' => $category,
+                'type' => CategoryTypeEnum::INCOME,
             ]);
         });
     }

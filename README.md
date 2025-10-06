@@ -8,3 +8,7 @@
 - [ ] Once paid, they should show up in my transactions
 - [ ] Should be able to add incomes to accounts so that I have a live balance
 - [ ] Might need entries to sync up accounts
+
+- name
+- type -> expense / income
+- is_active
