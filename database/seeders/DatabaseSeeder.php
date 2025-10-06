@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Account;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,13 +17,24 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
+        $user = User::firstOrCreate(
+            ['email' => 'reachme@amitavroy.com'],
             [
-                'name' => 'Test User',
-                'password' => Hash::make('password'),
+                'name' => 'Amitav Roy',
+                'password' => Hash::make('Password@123'),
                 'email_verified_at' => now(),
             ]
         );
+
+        collect([
+            'HDFC Bank Saving',
+            'ICICI Bank Credit Card',
+            'Axis Bank Credit Card',
+        ])->each(function ($account) use ($user) {
+            Account::factory()->create([
+                'user_id' => $user->id,
+                'name' => $account,
+            ]);
+        });
     }
 }
