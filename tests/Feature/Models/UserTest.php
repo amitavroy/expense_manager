@@ -4,7 +4,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 test('user has fillable attributes', function () {
-    $user = new User();
+    $user = new User;
 
     expect($user->getFillable())
         ->toBe([
@@ -15,7 +15,7 @@ test('user has fillable attributes', function () {
 });
 
 test('user has correct hidden fields', function () {
-    $user = new User();
+    $user = new User;
 
     expect($user->getHidden())->toBe([
         'password',
@@ -24,7 +24,7 @@ test('user has correct hidden fields', function () {
 });
 
 test('user has correct casts', function () {
-    $user = new User();
+    $user = new User;
 
     expect($user->getCasts())->toMatchArray([
         'email_verified_at' => 'datetime',
@@ -33,7 +33,7 @@ test('user has correct casts', function () {
 });
 
 test('user has accounts', function () {
-    $user = new User();
+    $user = new User;
 
     expect($user->accounts())
         ->toBeInstanceOf(HasMany::class);

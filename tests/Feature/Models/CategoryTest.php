@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\Category;
 use App\Enums\TransactionTypeEnum;
+use App\Models\Category;
 
 test('category has fillable attributes', function () {
-    $category = new Category();
+    $category = new Category;
 
     expect($category->getFillable())
         ->toBe([
@@ -15,7 +15,7 @@ test('category has fillable attributes', function () {
 });
 
 test('category has correct casts', function () {
-    $category = new Category();
+    $category = new Category;
 
     expect($category->getCasts())->toMatchArray([
         'is_active' => 'boolean',
