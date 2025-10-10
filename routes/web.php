@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
+// TODO: add the authentication and move inside the middleware
 Route::resource('transactions', TransactionController::class)
     ->only(['store'])
     ->withoutMiddleware(VerifyCsrfToken::class);

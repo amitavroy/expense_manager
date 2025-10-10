@@ -29,6 +29,15 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        $user2 = User::firstOrCreate(
+            ['email' => 'jhon.doe@gmail.com'],
+            [
+                'name' => 'Jhon Doe',
+                'password' => Hash::make('Password@123'),
+                'email_verified_at' => now(),
+            ]
+        );
+
         collect([
             'HDFC Bank Saving',
             'ICICI Bank Credit Card',
@@ -94,5 +103,13 @@ class DatabaseSeeder extends Seeder
             Transaction::create($transaction);
         });
 
+        collect([
+            'HDFC Bank Saving',
+        ])->each(function ($account) use ($user2) {
+            Account::factory()->create([
+                'user_id' => $user2->id,
+                'name' => $account,
+            ]);
+        });
     }
 }
