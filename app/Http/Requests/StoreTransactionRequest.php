@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Account;
 use App\Models\Category;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Context;
 
@@ -41,7 +40,7 @@ class StoreTransactionRequest extends FormRequest
             $account = Account::find($data['account_id']);
 
             // TODO: check if the account belongs to the user
-            if (!$account) {
+            if (! $account) {
                 $validator->errors()->add('account_id', 'Account not found');
             }
 
@@ -50,7 +49,7 @@ class StoreTransactionRequest extends FormRequest
             }
 
             $category = Category::find($data['category_id']);
-            if (!$category) {
+            if (! $category) {
                 $validator->errors()->add('category_id', 'Category not found');
             }
 
