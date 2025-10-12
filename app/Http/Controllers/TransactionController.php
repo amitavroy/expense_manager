@@ -3,19 +3,52 @@
 namespace App\Http\Controllers;
 
 use App\Actions\AddTransactionAction;
+use App\Enums\TransactionTypeEnum;
 use App\Http\Requests\StoreTransactionRequest;
+use App\Models\Account;
+use App\Models\Category;
 use App\Models\Transaction;
-use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class TransactionController extends Controller
 {
-    public function store(StoreTransactionRequest $request, AddTransactionAction $action)
+    public function index(): Response
     {
-        // TODO: get the authentication in place
-        $user = User::find(1);
-        Auth::login($user);
+        $transactions = Transaction::query()
+            ->with(['account', 'category'])
+            ->orderByDesc('date')
+            ->paginate(10);
+
+        return Inertia::render('transactions/index', [
+            'transactions' => $transactions,
+        ]);
+    }
+
+    public function create(): Response
+    {
+        $accounts = Account::query()
+            ->select('id', 'name')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+        $categories = Category::query()
+            ->select('id', 'name')
+            ->where('type', TransactionTypeEnum::EXPENSE)
+            ->get();
+
+        return Inertia::render('transactions/create', [
+            'accounts' => $accounts,
+            'categories' => $categories,
+        ]);
+    }
+
+    public function store(StoreTransactionRequest $request, AddTransactionAction $action): RedirectResponse
+    {
+        $user = Auth::user();
         $data = $request->validated();
 
         $category = Context::pull('category');
@@ -24,6 +57,6 @@ class TransactionController extends Controller
         // create the transaction
         $transaction = $action->execute($data, $category, $account, $user);
 
-        return response()->json($transaction);
+        return redirect()->route('transactions.index');
     }
 }

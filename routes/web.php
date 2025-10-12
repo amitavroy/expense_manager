@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\TransactionController;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -13,12 +12,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    Route::resource('transactions', TransactionController::class)
+        ->only(['store', 'index', 'create']);
 });
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
-
-// TODO: add the authentication and move inside the middleware
-Route::resource('transactions', TransactionController::class)
-    ->only(['store'])
-    ->withoutMiddleware(VerifyCsrfToken::class);
