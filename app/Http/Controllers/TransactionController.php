@@ -62,7 +62,7 @@ class TransactionController extends Controller
     {
         $accounts = $this->getDropdownData()['accounts'];
         $categories = $this->getDropdownData()['categories'];
-        $transaction = new Transaction();
+        $transaction = new Transaction;
 
         return Inertia::render('transactions/create', [
             'accounts' => $accounts,

@@ -74,7 +74,15 @@ export default function TransactionsIndexPage({
                                 </TableHeader>
                                 <TableBody>
                                     {transactions.data.map((transaction) => (
-                                        <TableRow key={transaction.id} onClick={() => goToTransactionDetailsPage(transaction)} className="cursor-pointer">
+                                        <TableRow
+                                            key={transaction.id}
+                                            onClick={() =>
+                                                goToTransactionDetailsPage(
+                                                    transaction,
+                                                )
+                                            }
+                                            className="cursor-pointer"
+                                        >
                                             <TableCell>
                                                 {transaction.id}
                                             </TableCell>

@@ -39,10 +39,16 @@ export default function TransactionForm({
 }: TransactionAddFormProps) {
     const isEdit = transaction.id !== undefined;
     const { data, setData, post, put, processing, errors, reset } = useForm({
-        account_id: transaction.account_id ? transaction.account_id.toString() : '',
-        category_id: transaction.category_id ? transaction.category_id.toString() : '',
+        account_id: transaction.account_id
+            ? transaction.account_id.toString()
+            : '',
+        category_id: transaction.category_id
+            ? transaction.category_id.toString()
+            : '',
         amount: transaction.amount || '',
-        date: transaction.date ? new Date(transaction.date).toISOString().split('T')[0] : '',
+        date: transaction.date
+            ? new Date(transaction.date).toISOString().split('T')[0]
+            : '',
         description: transaction.description || '',
     });
 
@@ -66,9 +72,13 @@ export default function TransactionForm({
             <CardContent>
                 <form onSubmit={handleSubmit}>
                     <FieldSet>
-                        <FieldLegend>{isEdit ? 'Edit Transaction' : 'Add Transaction'}</FieldLegend>
+                        <FieldLegend>
+                            {isEdit ? 'Edit Transaction' : 'Add Transaction'}
+                        </FieldLegend>
                         <FieldDescription>
-                            {isEdit ? 'Edit the details of a transaction' : 'Add details about a new transaction'}
+                            {isEdit
+                                ? 'Edit the details of a transaction'
+                                : 'Add details about a new transaction'}
                         </FieldDescription>
                         <FieldGroup>
                             {/* Account Selection */}
@@ -237,7 +247,11 @@ export default function TransactionForm({
                         {/* Submit Button */}
                         <div className="flex justify-end gap-2">
                             <Button type="submit" disabled={processing}>
-                                {processing ? 'Saving...' : (isEdit ? 'Save Transaction' : 'Add Transaction')}
+                                {processing
+                                    ? 'Saving...'
+                                    : isEdit
+                                      ? 'Save Transaction'
+                                      : 'Add Transaction'}
                             </Button>
                         </div>
                     </FieldSet>
