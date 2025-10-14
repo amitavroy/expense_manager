@@ -47,3 +47,12 @@ join users as u on u.id = t.user_id
 join categories as c on c.id = t.category_id
 where c.type = 'expense'
 ```
+
+Cases for Transaction edit:
+1. New amount can be less or more
+2. If new amount is less, we add balance back to the account
+3. If new amount is more, then we nedd to check the balance and then reduce from the account
+4. If it is from a different account then 
+   1. First check the balance of the new account
+   2. Then add back the old amount to the old account
+   3. Reduce the balance from the new account

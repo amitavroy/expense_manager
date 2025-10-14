@@ -23,32 +23,42 @@ import {
     AccountDropdown,
     CategoryDropdown,
 } from '../pages/transactions/create';
-import { store } from '../routes/transactions';
+import { store, update } from '../routes/transactions';
+import { Transaction } from '../types';
 
 interface TransactionAddFormProps {
     accounts: AccountDropdown[];
     categories: CategoryDropdown[];
+    transaction: Transaction;
 }
 
-export default function TransactionAddForm({
+export default function TransactionForm({
     accounts,
     categories,
+    transaction,
 }: TransactionAddFormProps) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        account_id: '',
-        category_id: '',
-        amount: '',
-        date: '',
-        description: '',
+    const isEdit = transaction.id !== undefined;
+    const { data, setData, post, put, processing, errors, reset } = useForm({
+        account_id: transaction.account_id ? transaction.account_id.toString() : '',
+        category_id: transaction.category_id ? transaction.category_id.toString() : '',
+        amount: transaction.amount || '',
+        date: transaction.date ? new Date(transaction.date).toISOString().split('T')[0] : '',
+        description: transaction.description || '',
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(store().url, {
-            onSuccess: () => {
-                reset();
-            },
-        });
+        const url = isEdit ? update(transaction.id).url : store().url;
+
+        if (isEdit) {
+            put(url);
+        } else {
+            post(url, {
+                onSuccess: () => {
+                    reset();
+                },
+            });
+        }
     };
 
     return (
@@ -56,9 +66,9 @@ export default function TransactionAddForm({
             <CardContent>
                 <form onSubmit={handleSubmit}>
                     <FieldSet>
-                        <FieldLegend>Add a new transaction</FieldLegend>
+                        <FieldLegend>{isEdit ? 'Edit Transaction' : 'Add Transaction'}</FieldLegend>
                         <FieldDescription>
-                            Add details about the transaction
+                            {isEdit ? 'Edit the details of a transaction' : 'Add details about a new transaction'}
                         </FieldDescription>
                         <FieldGroup>
                             {/* Account Selection */}
@@ -227,7 +237,7 @@ export default function TransactionAddForm({
                         {/* Submit Button */}
                         <div className="flex justify-end gap-2">
                             <Button type="submit" disabled={processing}>
-                                {processing ? 'Adding...' : 'Add Transaction'}
+                                {processing ? 'Saving...' : (isEdit ? 'Save Transaction' : 'Add Transaction')}
                             </Button>
                         </div>
                     </FieldSet>

@@ -11,7 +11,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: index().url,
     },
     {
-        title: 'Add Transaction',
+        title: 'Transaction Details',
         href: '#',
     },
 ];
@@ -26,7 +26,7 @@ export interface CategoryDropdown {
     name: string;
 }
 
-interface TransactionsCreateProps {
+interface TransactionsShowProps {
     accounts: AccountDropdown[];
     categories: CategoryDropdown[];
     transaction: Transaction;
@@ -36,15 +36,15 @@ export default function TransactionsCreatePage({
     accounts,
     categories,
     transaction,
-}: TransactionsCreateProps) {
+}: TransactionsShowProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Add Transaction" />
+            <Head title="Transaction Details" />
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <Heading
-                    title="Add Transaction"
-                    description="Add a new transaction"
+                    title="Transaction Details"
+                    description="View the details of a transaction"
                 />
 
                 <div className="grid grid-cols-4">

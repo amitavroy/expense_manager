@@ -53,6 +53,7 @@ export interface NavItem {
     href: NonNullable<InertiaLinkProps['href']>;
     icon?: LucideIcon | null;
     isActive?: boolean;
+    prefetch?: boolean;
 }
 
 export interface SharedData {

@@ -27,6 +27,7 @@ const mainNavItems: NavItem[] = [
         title: 'Transactions',
         href: index().url,
         icon: CreditCard,
+        prefetch: false,
     },
 ];
 

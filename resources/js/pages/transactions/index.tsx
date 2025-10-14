@@ -13,7 +13,7 @@ import {
 } from '../../components/ui/table';
 import AppLayout from '../../layouts/app-layout';
 import { formatDate } from '../../lib/utils';
-import { create, index } from '../../routes/transactions';
+import { create, index, show } from '../../routes/transactions';
 import { BreadcrumbItem, PaginateData, Transaction } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -32,6 +32,9 @@ export default function TransactionsIndexPage({
 }: TransactionsIndexProps) {
     const goToAddTransactionPage = () => {
         router.visit(create().url);
+    };
+    const goToTransactionDetailsPage = (transaction: Transaction) => {
+        router.visit(show(transaction.id).url);
     };
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -71,7 +74,7 @@ export default function TransactionsIndexPage({
                                 </TableHeader>
                                 <TableBody>
                                     {transactions.data.map((transaction) => (
-                                        <TableRow key={transaction.id}>
+                                        <TableRow key={transaction.id} onClick={() => goToTransactionDetailsPage(transaction)} className="cursor-pointer">
                                             <TableCell>
                                                 {transaction.id}
                                             </TableCell>
