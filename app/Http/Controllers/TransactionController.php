@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Actions\AddTransactionAction;
+use App\Actions\UpdateTransactionAction;
 use App\Enums\TransactionTypeEnum;
 use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
 use Inertia\Inertia;
@@ -41,19 +42,26 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function update(Request $request, Transaction $transaction)
+    public function update(UpdateTransactionRequest $request, Transaction $transaction, UpdateTransactionAction $action)
     {
-        $data = $request->validate([
-            'account_id' => ['required'],
-            'category_id' => ['required'],
-            'amount' => ['required', 'numeric', 'min:1'],
-            'date' => ['required', 'date'],
-            'description' => ['required', 'string', 'max:255'],
-        ]);
+        $data = $request->validated();
 
-        abort_unless($transaction->user_id === Auth::user()->id, 403);
+        // Pull the data from context
+        $oldAccount = Context::pull('old_account');
+        $newAccount = Context::pull('new_account');
+        $oldCategory = Context::pull('old_category');
+        $newCategory = Context::pull('new_category');
+        $oldAmount = Context::pull('old_amount');
 
-        $transaction->update($data);
+        $action->execute(
+            transaction: $transaction,
+            data: $data,
+            newAccount: $newAccount,
+            oldAccount: $oldAccount,
+            newCategory: $newCategory,
+            oldCategory: $oldCategory,
+            oldAmount: $oldAmount,
+        );
 
         return redirect()->route('transactions.show', $transaction);
     }
