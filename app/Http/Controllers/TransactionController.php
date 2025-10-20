@@ -24,6 +24,7 @@ class TransactionController extends Controller
         $transactions = Transaction::query()
             ->with(['account', 'category'])
             ->orderByDesc('date')
+            ->orderByDesc('id')
             ->paginate(10);
 
         return Inertia::render('transactions/index', [

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -13,8 +14,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 
+    Route::resource('accounts', AccountController::class)
+        ->except(['edit']);
+
     Route::resource('transactions', TransactionController::class)
-        ->only(['store', 'index', 'create', 'show', 'update', 'destroy']);
+        ->except(['edit']);
 });
 
 require __DIR__.'/settings.php';
