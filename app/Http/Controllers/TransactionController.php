@@ -13,6 +13,7 @@ use App\Models\Transaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -109,5 +110,28 @@ class TransactionController extends Controller
             'accounts' => $accounts,
             'categories' => $categories,
         ];
+    }
+
+    public function destroy(Transaction $transaction): RedirectResponse
+    {
+        $transaction->load(['account', 'category']);
+        abort_if($transaction->user_id !== Auth::user()->id, 403);
+
+        if (
+            $transaction->category->type === TransactionTypeEnum::INCOME &&
+            $transaction->account->balance < $transaction->amount) {
+            abort(403, 'Insufficient funds');
+        }
+
+        DB::transaction(function () use ($transaction) {
+            match ($transaction->category->type) {
+                TransactionTypeEnum::EXPENSE => $transaction->account->increment('balance', $transaction->amount),
+                TransactionTypeEnum::INCOME => $transaction->account->decrement('balance', $transaction->amount),
+            };
+
+            $transaction->delete();
+        });
+
+        return redirect()->route('transactions.index');
     }
 }

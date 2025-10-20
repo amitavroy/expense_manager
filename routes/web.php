@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('transactions', TransactionController::class)
-        ->only(['store', 'index', 'create', 'show', 'update']);
+        ->only(['store', 'index', 'create', 'show', 'update', 'destroy']);
 });
 
 require __DIR__.'/settings.php';
