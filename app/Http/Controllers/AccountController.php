@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\AddAccountAction;
+use App\Http\Requests\StoreAccountRequest;
+use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $accounts = Account::query()
             ->where('user_id', Auth::user()->id)
+            ->orderBy('name')
             ->paginate(10);
 
         return Inertia::render('accounts/index', [
@@ -26,7 +31,7 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
         $account = new Account;
 
@@ -38,32 +43,49 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAccountRequest $request, AddAccountAction $addAccountAction): RedirectResponse
     {
-        //
+        $data = $request->validated();
+
+        $account = $addAccountAction->execute($data, Auth::user());
+
+        return redirect()->route('accounts.show', $account)
+            ->with('success', 'Account created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Account $account)
+    public function show(Account $account): Response
     {
-        //
+        return Inertia::render('accounts/show', [
+            'account' => $account,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Account $account)
+    public function update(UpdateAccountRequest $request, Account $account): RedirectResponse
     {
-        //
+        $data = $request->validated();
+
+        $account->update($data);
+
+        return redirect()->route('accounts.show', $account)
+            ->with('success', 'Account updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Account $account)
+    public function destroy(Account $account): RedirectResponse
     {
-        //
+        abort_if($account->user_id !== Auth::user()->id, 403);
+
+        $account->delete();
+
+        return redirect()->route('accounts.index')
+            ->with('success', 'Account deleted successfully');
     }
 }

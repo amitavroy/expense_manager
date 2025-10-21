@@ -9,14 +9,16 @@ import {
     TableRow,
 } from '../components/ui/table';
 import { formatDate } from '../lib/utils';
-import { PaginateData, Transaction } from '../types';
 import { show } from '../routes/transactions';
+import { PaginateData, Transaction } from '../types';
 
 interface TransactionsTableProps {
     transactions: PaginateData<Transaction>;
 }
 
-export default function TransactionsTable({ transactions }: TransactionsTableProps) {
+export default function TransactionsTable({
+    transactions,
+}: TransactionsTableProps) {
     return (
         <Table>
             <TableCaption>A list of my recent transactions</TableCaption>
@@ -51,5 +53,3 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
         </Table>
     );
 }
-
-

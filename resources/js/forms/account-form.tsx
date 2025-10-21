@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import { ConfirmDialog } from '../components/confirm-dialog';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -20,8 +20,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from '../components/ui/select';
+import { destroy, store, update } from '../routes/accounts';
 import { Account, AccountType } from '../types';
-import { store, update } from '../routes/accounts';
 
 const accountTypeOptions: { value: AccountType; label: string }[] = [
     { value: 'bank', label: 'Bank Account' },
@@ -47,7 +47,10 @@ export default function AccountForm({ account }: { account: Account }) {
                     reset();
                 },
             });
-    const handleDelete = () => {};
+        }
+    };
+
+    const handleDelete = () => router.delete(destroy(account.id).url);
     return (
         <Card>
             <CardContent>

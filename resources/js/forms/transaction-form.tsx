@@ -1,4 +1,5 @@
 import { router, useForm } from '@inertiajs/react';
+import { ConfirmDialog } from '../components/confirm-dialog';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import {
@@ -25,7 +26,6 @@ import {
 } from '../pages/transactions/create';
 import { destroy, store, update } from '../routes/transactions';
 import { Transaction } from '../types';
-import { ConfirmDialog } from '../components/confirm-dialog';
 
 interface TransactionAddFormProps {
     accounts: AccountDropdown[];
@@ -68,7 +68,7 @@ export default function TransactionForm({
         }
     };
 
-    const handleDelete = () => router.delete(destroy(transaction.id).url)
+    const handleDelete = () => router.delete(destroy(transaction.id).url);
 
     return (
         <Card>
@@ -250,11 +250,13 @@ export default function TransactionForm({
                         {/* Submit Button */}
                         <div className="flex justify-between gap-2">
                             <ConfirmDialog
-                                title='Delete Transaction'
-                                description='Are you sure you want to delete this transaction?'
-                                confirmButtonText='Delete'
+                                title="Delete Transaction"
+                                description="Are you sure you want to delete this transaction?"
+                                confirmButtonText="Delete"
                                 trigger={
-                                    <Button variant='destructive' type='button'>Delete</Button>
+                                    <Button variant="destructive" type="button">
+                                        Delete
+                                    </Button>
                                 }
                                 onConfirm={handleDelete}
                             />

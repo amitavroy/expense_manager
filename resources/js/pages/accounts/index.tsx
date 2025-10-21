@@ -1,11 +1,11 @@
-import { Head, router } from "@inertiajs/react";
-import AppLayout from "../../layouts/app-layout"
-import { create, index } from "../../routes/accounts";
-import { Account, BreadcrumbItem, PaginateData } from "../../types";
-import Heading from "../../components/heading";
-import { Button } from "../../components/ui/button";
-import { PlusIcon } from "lucide-react";
-import AccountsTable from "../../tables/accounts-table";
+import { Head, router } from '@inertiajs/react';
+import { PlusIcon } from 'lucide-react';
+import Heading from '../../components/heading';
+import { Button } from '../../components/ui/button';
+import AppLayout from '../../layouts/app-layout';
+import { create, index } from '../../routes/accounts';
+import AccountsTable from '../../tables/accounts-table';
+import { Account, BreadcrumbItem, PaginateData } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -18,19 +18,17 @@ interface AccountsIndexProps {
     accounts: PaginateData<Account>;
 }
 
-export default function AccountsIndexPage({accounts}: AccountsIndexProps) {
+export default function AccountsIndexPage({ accounts }: AccountsIndexProps) {
     const goToAddAccountPage = () => {
         router.visit(create().url);
     };
 
-    return <AppLayout breadcrumbs={breadcrumbs}>
-        <Head title="My accounts" />
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="My accounts" />
 
-        <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <Heading
-                    title="Accounts"
-                    description="All my accounts"
-                />
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+                <Heading title="Accounts" description="All my accounts" />
 
                 <div className="flex w-full justify-end">
                     <Button onClick={goToAddAccountPage}>
@@ -48,5 +46,6 @@ export default function AccountsIndexPage({accounts}: AccountsIndexProps) {
                     <div></div>
                 </div>
             </div>
-    </AppLayout>
+        </AppLayout>
+    );
 }

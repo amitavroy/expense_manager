@@ -32,7 +32,7 @@ interface TransactionsShowProps {
     transaction: Transaction;
 }
 
-export default function TransactionsCreatePage({
+export default function TransactionsShowPage({
     accounts,
     categories,
     transaction,

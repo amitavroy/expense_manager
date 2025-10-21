@@ -3,9 +3,9 @@ import { PlusIcon } from 'lucide-react';
 import Heading from '../../components/heading';
 import { Button } from '../../components/ui/button';
 import AppLayout from '../../layouts/app-layout';
-import { create, index, show } from '../../routes/transactions';
-import { BreadcrumbItem, PaginateData, Transaction } from '../../types';
+import { create, index } from '../../routes/transactions';
 import TransactionsTable from '../../tables/transactions-table';
+import { BreadcrumbItem, PaginateData, Transaction } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

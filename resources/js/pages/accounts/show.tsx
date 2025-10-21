@@ -16,17 +16,20 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-interface AccountsCreateProps {
+interface AccountsShowProps {
     account: Account;
 }
 
-export default function AccountsCreatePage({ account }: AccountsCreateProps) {
+export default function AccountsShowPage({ account }: AccountsShowProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Add Account" />
+            <Head title="Account Details" />
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <Heading title="Add Account" description="Add a new account" />
+                <Heading
+                    title="Account Details"
+                    description="View the details of an account"
+                />
 
                 <div className="grid grid-cols-4">
                     <div className="col-span-3 lg:col-span-2">

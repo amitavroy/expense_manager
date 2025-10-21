@@ -18,6 +18,7 @@ class Account extends Model
         'balance',
         'currency',
         'is_active',
+        'user_id',
     ];
 
     protected $casts = [
