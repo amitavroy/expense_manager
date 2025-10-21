@@ -13,6 +13,7 @@ test('account has fillable attributes', function () {
         'balance',
         'currency',
         'is_active',
+        'user_id',
     ]);
 });
 
