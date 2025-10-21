@@ -6,7 +6,12 @@ It should allow me to track my expenses, incomes. It should also allow me to kee
 
 ## Technology used
 
-Right now, this project uses Laravel + Inertiajs + React starter kit. 
+Right now, this project uses 
+- Laravel 
+- Inertiajs 
+- React with Typescript
+
+This is based on the React starter kit of Laravel.
 Database used for development has been SQLite. However, it should run easily on MySQL and even PGSql
 
 ## Installation
@@ -28,9 +33,16 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
+# Modules 
+
+## Transactions 
+
+The transaction module will allow you to add expenses. Every expense is linked to a bank account. When you add an expense transaction, you need to select the account. And, the same amount is deducted from your account.
+When you edit a transaction, we are also handling the scenarios like user changing the category and even account. The account balances are also updated based on the new edited transaction.
+
 # TODO
 
-- [ ] Track my expenses through transactions
+- [x] Track my expenses through transactions
 - [x] I should be able to make expense from an account
 - [x] Expenses should have category
 - [ ] Should be able to add bills with their repeat date 
@@ -48,11 +60,3 @@ join categories as c on c.id = t.category_id
 where c.type = 'expense'
 ```
 
-Cases for Transaction edit:
-1. New amount can be less or more
-2. If new amount is less, we add balance back to the account
-3. If new amount is more, then we nedd to check the balance and then reduce from the account
-4. If it is from a different account then 
-   1. First check the balance of the new account
-   2. Then add back the old amount to the old account
-   3. Reduce the balance from the new account
