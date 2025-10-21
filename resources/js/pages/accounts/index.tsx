@@ -5,7 +5,7 @@ import { Account, BreadcrumbItem, PaginateData } from "../../types";
 import Heading from "../../components/heading";
 import { Button } from "../../components/ui/button";
 import { PlusIcon } from "lucide-react";
-import AccountsTable from "../../tables/accounts.table";
+import AccountsTable from "../../tables/accounts-table";
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

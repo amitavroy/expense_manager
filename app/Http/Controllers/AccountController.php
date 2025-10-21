@@ -28,7 +28,11 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        $account = new Account;
+
+        return Inertia::render('accounts/create', [
+            'account' => $account,
+        ]);
     }
 
     /**

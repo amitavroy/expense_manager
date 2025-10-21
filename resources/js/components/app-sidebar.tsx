@@ -11,10 +11,11 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { index } from '@/routes/transactions';
+import { index as indexTransactions } from '@/routes/transactions';
+import { index as indexAccounts } from '@/routes/accounts';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, CreditCard, Folder, LayoutGrid } from 'lucide-react';
+import { Banknote, BookOpen, CreditCard, Folder, LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -25,10 +26,16 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Transactions',
-        href: index().url,
+        href: indexTransactions().url,
         icon: CreditCard,
         prefetch: false,
     },
+    {
+        title: 'Accounts',
+        href: indexAccounts().url,
+        icon: Banknote,
+        prefetch: true,
+    }
 ];
 
 const footerNavItems: NavItem[] = [

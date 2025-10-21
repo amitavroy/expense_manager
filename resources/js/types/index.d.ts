@@ -8,7 +8,7 @@ export interface Account {
     name: string;
     type: AccountType;
     balance: number;
-    current: string;
+    currency: string;
     is_active: boolean;
     created_at: string;
 }
