@@ -60,3 +60,6 @@ join categories as c on c.id = t.category_id
 where c.type = 'expense'
 ```
 
+Need to evaluate:
+https://github.com/moneyphp/money
+https://github.com/brick/money

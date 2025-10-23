@@ -1,7 +1,16 @@
 import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
 
+export interface Category {
+    id: number;
+    name: string;
+    type: CategoryType;
+    is_active: boolean;
+    created_at: string;
+}
+
 export type AccountType = 'bank' | 'cash' | 'credit_card';
+export type CategoryType = 'income' | 'expense';
 
 export interface Account {
     id: number;

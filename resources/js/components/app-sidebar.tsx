@@ -13,6 +13,7 @@ import {
 import { dashboard } from '@/routes';
 import { index as indexAccounts } from '@/routes/accounts';
 import { index as indexTransactions } from '@/routes/transactions';
+import { index as indexCategories } from '@/routes/categories';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
@@ -40,6 +41,12 @@ const mainNavItems: NavItem[] = [
         title: 'Accounts',
         href: indexAccounts().url,
         icon: Banknote,
+        prefetch: true,
+    },
+    {
+        title: 'Categories',
+        href: indexCategories().url,
+        icon: Folder,
         prefetch: true,
     },
 ];
