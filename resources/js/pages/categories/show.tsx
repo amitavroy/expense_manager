@@ -3,7 +3,7 @@ import Heading from '../../components/heading';
 import CategoryForm from '../../forms/category-form';
 import AppLayout from '../../layouts/app-layout';
 import { index } from '../../routes/categories';
-import { Category, BreadcrumbItem } from '../../types';
+import { BreadcrumbItem, Category } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

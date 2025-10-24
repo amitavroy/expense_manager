@@ -1,9 +1,9 @@
-import { Head } from "@inertiajs/react";
-import AppLayout from "../../layouts/app-layout";
-import { BreadcrumbItem, Category } from "../../types";
-import { index } from "../../routes/categories";
-import Heading from "../../components/heading";
-import CategoryForm from "../../forms/category-form";
+import { Head } from '@inertiajs/react';
+import Heading from '../../components/heading';
+import CategoryForm from '../../forms/category-form';
+import AppLayout from '../../layouts/app-layout';
+import { index } from '../../routes/categories';
+import { BreadcrumbItem, Category } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -20,7 +20,9 @@ interface CategoriesCreateProps {
     category: Category;
 }
 
-export default function CategoriesCreatePage({ category }: CategoriesCreateProps) {
+export default function CategoriesCreatePage({
+    category,
+}: CategoriesCreateProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create Category" />

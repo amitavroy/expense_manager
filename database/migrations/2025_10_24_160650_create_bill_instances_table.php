@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('paid_date')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

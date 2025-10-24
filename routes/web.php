@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BillerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->except(['edit']);
 
     Route::resource('categories', CategoryController::class)
+        ->except(['edit']);
+
+    Route::resource('billers', BillerController::class)
         ->except(['edit']);
 });
 

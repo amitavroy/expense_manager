@@ -3,49 +3,41 @@ import { PlusIcon } from 'lucide-react';
 import Heading from '../../components/heading';
 import { Button } from '../../components/ui/button';
 import AppLayout from '../../layouts/app-layout';
-import { create, index } from '../../routes/categories';
-import CategoryTable from '../../tables/category-table';
-import { BreadcrumbItem, Category, PaginateData } from '../../types';
+import { create, index } from '../../routes/billers';
+import { Biller, BreadcrumbItem, PaginateData } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Categories',
+        title: 'Billers',
         href: index().url,
     },
 ];
 
-interface CategoriesIndexProps {
-    categories: PaginateData<Category>;
+interface BillersIndexProps {
+    billers: PaginateData<Biller>;
 }
 
-export default function CategoriesIndexPage({
-    categories,
-}: CategoriesIndexProps) {
-    const goToAddCategoryPage = () => {
+export default function BillersIndexPage({ billers }: BillersIndexProps) {
+    const goToAddBillerPage = () => {
         router.visit(create().url);
     };
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Categories" />
+            <Head title="Billers" />
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
-                <Heading
-                    title="Transactions"
-                    description="All my transactions transactions"
-                />
+                <Heading title="Billers" description="All my billers" />
 
                 <div className="flex w-full justify-end">
-                    <Button onClick={goToAddCategoryPage}>
+                    <Button onClick={goToAddBillerPage}>
                         <PlusIcon />
-                        Add Category
+                        Add Biller
                     </Button>
                 </div>
 
                 <div className="grid grid-cols-3">
                     <div className="col-span-2">
-                        <div className="flex flex-col gap-4">
-                            <CategoryTable categories={categories} />
-                        </div>
+                        <div className="flex flex-col gap-4"></div>
                     </div>
                     <div></div>
                 </div>

@@ -12,8 +12,8 @@ import {
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { index as indexAccounts } from '@/routes/accounts';
-import { index as indexTransactions } from '@/routes/transactions';
 import { index as indexCategories } from '@/routes/categories';
+import { index as indexTransactions } from '@/routes/transactions';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
