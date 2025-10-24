@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Models\Category;
-use App\Models\User;
 
 class AddCategoryAction
 {

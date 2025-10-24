@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Account;
-use App\Models\BillInstance;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -15,15 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('billers', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->index();
-            $table->foreignIdFor(Account::class)->index();
             $table->foreignIdFor(Category::class)->index();
-            $table->foreignIdFor(BillInstance::class)->index()->nullable();
-            $table->decimal('amount', 10, 2);
-            $table->date('date');
+            $table->string('name');
             $table->string('description');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('billers');
     }
 };

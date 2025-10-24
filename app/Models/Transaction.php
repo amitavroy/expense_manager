@@ -15,6 +15,7 @@ class Transaction extends Model
         'user_id',
         'account_id',
         'category_id',
+        'bill_instance_id',
         'amount',
         'date',
         'description',
@@ -38,5 +39,10 @@ class Transaction extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function billInstance(): BelongsTo
+    {
+        return $this->belongsTo(BillInstance::class);
     }
 }
