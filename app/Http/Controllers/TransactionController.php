@@ -7,9 +7,8 @@ use App\Actions\UpdateTransactionAction;
 use App\Enums\TransactionTypeEnum;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
-use App\Models\Account;
-use App\Models\Category;
 use App\Models\Transaction;
+use App\Services\DropdownService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Context;
@@ -19,6 +18,10 @@ use Inertia\Response;
 
 class TransactionController extends Controller
 {
+    public function __construct(
+        private readonly DropdownService $dropdownService
+    ) {}
+
     public function index(): Response
     {
         $transactions = Transaction::query()
@@ -34,8 +37,8 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction): Response
     {
-        $accounts = $this->getDropdownData()['accounts'];
-        $categories = $this->getDropdownData()['categories'];
+        $accounts = $this->dropdownService->getAccounts(Auth::user());
+        $categories = $this->dropdownService->getCategories();
 
         return Inertia::render('transactions/show', [
             'accounts' => $accounts,
@@ -70,8 +73,8 @@ class TransactionController extends Controller
 
     public function create(): Response
     {
-        $accounts = $this->getDropdownData()['accounts'];
-        $categories = $this->getDropdownData()['categories'];
+        $accounts = $this->dropdownService->getAccounts(Auth::user());
+        $categories = $this->dropdownService->getCategories();
         $transaction = new Transaction;
 
         return Inertia::render('transactions/create', [
@@ -95,24 +98,6 @@ class TransactionController extends Controller
         return redirect()->route('transactions.index');
     }
 
-    private function getDropdownData(): array
-    {
-        $accounts = Account::query()
-            ->select('id', 'name')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-
-        $categories = Category::query()
-            ->select('id', 'name')
-            ->where('type', TransactionTypeEnum::EXPENSE)
-            ->get();
-
-        return [
-            'accounts' => $accounts,
-            'categories' => $categories,
-        ];
-    }
-
     public function destroy(Transaction $transaction): RedirectResponse
     {
         $transaction->load(['account', 'category']);
@@ -120,7 +105,8 @@ class TransactionController extends Controller
 
         if (
             $transaction->category->type === TransactionTypeEnum::INCOME &&
-            $transaction->account->balance < $transaction->amount) {
+            $transaction->account->balance < $transaction->amount
+        ) {
             abort(403, 'Insufficient funds');
         }
 

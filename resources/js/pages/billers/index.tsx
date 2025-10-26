@@ -3,13 +3,14 @@ import { PlusIcon } from 'lucide-react';
 import Heading from '../../components/heading';
 import { Button } from '../../components/ui/button';
 import AppLayout from '../../layouts/app-layout';
-import { create, index } from '../../routes/billers';
+import billerRoutes from '../../routes/billers';
+import BillerTable from '../../tables/biller-table';
 import { Biller, BreadcrumbItem, PaginateData } from '../../types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Billers',
-        href: index().url,
+        href: billerRoutes.index().url,
     },
 ];
 
@@ -19,7 +20,7 @@ interface BillersIndexProps {
 
 export default function BillersIndexPage({ billers }: BillersIndexProps) {
     const goToAddBillerPage = () => {
-        router.visit(create().url);
+        router.visit(billerRoutes.create().url);
     };
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -37,7 +38,9 @@ export default function BillersIndexPage({ billers }: BillersIndexProps) {
 
                 <div className="grid grid-cols-3">
                     <div className="col-span-2">
-                        <div className="flex flex-col gap-4"></div>
+                        <div className="flex flex-col gap-4">
+                            <BillerTable billers={billers} />
+                        </div>
                     </div>
                     <div></div>
                 </div>
