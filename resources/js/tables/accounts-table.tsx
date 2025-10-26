@@ -14,19 +14,23 @@ import { Account, PaginateData } from '../types';
 
 interface AccountsTableProps {
     accounts: PaginateData<Account>;
+    fullView?: boolean;
 }
 
-export default function AccountsTable({ accounts }: AccountsTableProps) {
+export default function AccountsTable({
+    accounts,
+    fullView = true,
+}: AccountsTableProps) {
     return (
         <Table>
             <TableCaption>A list of my accounts</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead>#</TableHead>
-                    <TableHead>Date</TableHead>
+                    {fullView && <TableHead>#</TableHead>}
+                    {fullView && <TableHead>Date</TableHead>}
                     <TableHead>Name</TableHead>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Status</TableHead>
+                    {fullView && <TableHead>Type</TableHead>}
+                    {fullView && <TableHead>Status</TableHead>}
                     <TableHead className="text-right">Balance</TableHead>
                 </TableRow>
             </TableHeader>
@@ -37,15 +41,23 @@ export default function AccountsTable({ accounts }: AccountsTableProps) {
                         onClick={() => router.visit(show(account.id).url)}
                         className="cursor-pointer"
                     >
-                        <TableCell>{account.id}</TableCell>
-                        <TableCell>{formatDate(account.created_at)}</TableCell>
+                        {fullView && <TableCell>{account.id}</TableCell>}
+                        {fullView && (
+                            <TableCell>
+                                {formatDate(account.created_at)}
+                            </TableCell>
+                        )}
                         <TableCell>{account.name}</TableCell>
-                        <TableCell className="capitalize">
-                            {account.type}
-                        </TableCell>
-                        <TableCell>
-                            {account.is_active ? 'Active' : 'Inactive'}
-                        </TableCell>
+                        {fullView && (
+                            <TableCell className="capitalize">
+                                {account.type}
+                            </TableCell>
+                        )}
+                        {fullView && (
+                            <TableCell>
+                                {account.is_active ? 'Active' : 'Inactive'}
+                            </TableCell>
+                        )}
                         <TableCell className="text-right">
                             INR {account.balance}
                         </TableCell>

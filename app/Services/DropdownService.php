@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Models\User;
+use App\Enums\TransactionTypeEnum;
 use App\Models\Account;
 use App\Models\Category;
-use App\Enums\TransactionTypeEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
 class DropdownService
 {
     /**
      * Get all categories for the user
-     * 
+     *
      * @return Collection<int, Category>
      */
     public function getCategories(): Collection
@@ -25,8 +25,7 @@ class DropdownService
 
     /**
      * Get all accounts for the user
-     * 
-     * @param User $user
+     *
      * @return Collection<int, Account>
      */
     public function getAccounts(User $user): Collection

@@ -66,7 +66,7 @@ interface AppHeaderProps {
 
 export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     const page = usePage<SharedData>();
-    const { auth } = page.props;
+    const { auth, name } = page.props;
     const getInitials = useInitials();
     return (
         <>
@@ -149,7 +149,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                         prefetch
                         className="flex items-center space-x-2"
                     >
-                        <AppLogo />
+                        <AppLogo title={name} />
                     </Link>
 
                     {/* Desktop Navigation */}

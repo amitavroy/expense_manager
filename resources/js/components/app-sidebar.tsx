@@ -15,8 +15,8 @@ import { index as indexAccounts } from '@/routes/accounts';
 import biller from '@/routes/billers';
 import categories from '@/routes/categories';
 import transactions from '@/routes/transactions';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/react';
+import { SharedData, type NavItem } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 import {
     Banknote,
     BookOpen,
@@ -73,6 +73,7 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const { name } = usePage<SharedData>().props;
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -80,7 +81,7 @@ export function AppSidebar() {
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
                             <Link href={dashboard()} prefetch>
-                                <AppLogo />
+                                <AppLogo title={name} />
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
