@@ -1,4 +1,4 @@
-# Expense manager
+# Xpense manager
 
 ![Xpense Manager](https://raw.githubusercontent.com/amitavroy/expense_manager/main/docs/Dashboard-1.jpg)
 
