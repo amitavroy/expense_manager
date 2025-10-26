@@ -37,19 +37,17 @@ php artisan migrate --seed
 
 ## Transactions 
 
-The transaction module will allow you to add expenses. Every expense is linked to a bank account. When you add an expense transaction, you need to select the account. And, the same amount is deducted from your account.
+![Transaction Screenshot](https://raw.githubusercontent.com/amitavroy/expense_manager/main/docs/Screenshot%202025-10-26%20at%201.07.54%E2%80%AFPM.jpg)
+
+The **Transactions** module will allow you to add expenses. Every expense is linked to a **Bank account**. When you add an expense transaction, you need to select the account. And, the same amount is deducted from your account.
+
+![Manager your transaction](https://raw.githubusercontent.com/amitavroy/expense_manager/refs/heads/main/docs/Screenshot%202025-10-26%20at%201.08.03%E2%80%AFPM.jpg)
+
 When you edit a transaction, we are also handling the scenarios like user changing the category and even account. The account balances are also updated based on the new edited transaction.
 
-# TODO
+## Billers
 
-- [x] Track my expenses through transactions
-- [x] I should be able to make expense from an account
-- [x] Expenses should have category
-- [ ] Should be able to add bills with their repeat date 
-- [ ] Should get reminders for my bills
-- [ ] Once paid, they should show up in my transactions
-- [ ] Should be able to add incomes to accounts so that I have a live balance
-- [ ] Might need entries to sync up accounts
+Users will be able to add **Billers** and their **Bills**. Based on that, Bills will be available on Dashboard for payment. When a Bill is paid, it will also get added to the Expenses with correct category.
 
 
 ```
