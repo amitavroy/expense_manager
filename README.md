@@ -1,5 +1,7 @@
 # Expense manager
 
+![Transaction Screenshot](https://raw.githubusercontent.com/amitavroy/expense_manager/main/docs/Screenshot%202025-10-26%20at%201.07.54%E2%80%AFPM.jpg)
+
 This application is an Expense manager that I want to use to track my expenses. 
 
 It should allow me to track my expenses, incomes. It should also allow me to keep a track of my bills.
