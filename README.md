@@ -1,6 +1,6 @@
 # Expense manager
 
-![Transaction Screenshot](https://raw.githubusercontent.com/amitavroy/expense_manager/main/docs/Screenshot%202025-10-26%20at%201.07.54%E2%80%AFPM.jpg)
+![Xpense Manager](https://raw.githubusercontent.com/amitavroy/expense_manager/main/docs/Dashboard-1.jpg)
 
 This application is an Expense manager that I want to use to track my expenses. 
 
