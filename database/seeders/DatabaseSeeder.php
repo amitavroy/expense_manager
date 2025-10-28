@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\TransactionTypeEnum;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Account;
+use App\Models\Biller;
 use App\Models\Category;
 use App\Models\Transaction;
 use App\Models\User;
@@ -29,6 +30,8 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        $this->setupDataForUser1($user);
+
         $user2 = User::firstOrCreate(
             ['email' => 'jhon.doe@gmail.com'],
             [
@@ -38,6 +41,18 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        collect([
+            'HDFC Bank Saving',
+        ])->each(function ($account) use ($user2) {
+            Account::factory()->create([
+                'user_id' => $user2->id,
+                'name' => $account,
+            ]);
+        });
+    }
+
+    private function setupDataForUser1(User $user): void
+    {
         collect([
             'HDFC Bank Saving',
             'ICICI Bank Credit Card',
@@ -104,12 +119,26 @@ class DatabaseSeeder extends Seeder
         });
 
         collect([
-            'HDFC Bank Saving',
-        ])->each(function ($account) use ($user2) {
-            Account::factory()->create([
-                'user_id' => $user2->id,
-                'name' => $account,
-            ]);
+            [
+                'name' => 'Airtel',
+                'description' => 'Airtel Monthly Bill',
+                'category_id' => 4,
+                'user_id' => $user->id,
+            ],
+            [
+                'name' => 'Vodafone',
+                'description' => 'Vodafone prepaid recharge',
+                'category_id' => 4,
+                'user_id' => $user->id,
+            ],
+            [
+                'name' => 'Airtel Inerter',
+                'description' => 'Airtel Internet Bill',
+                'category_id' => 4,
+                'user_id' => $user->id,
+            ],
+        ])->each(function ($biller) {
+            Biller::create($biller);
         });
     }
 }
