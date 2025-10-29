@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\AddBillerAction;
+use App\Models\Bill;
 use App\Models\Biller;
 use App\Services\DropdownService;
 use Illuminate\Http\RedirectResponse;
@@ -39,10 +40,12 @@ class BillerController extends Controller
     public function create(): Response
     {
         $biller = new Biller;
+        $bill = new Bill;
         $categories = $this->dropdownService->getCategories();
 
         return Inertia::render('billers/create', [
             'biller' => $biller,
+            'bill' => $bill,
             'categories' => $categories,
         ]);
     }
@@ -70,6 +73,7 @@ class BillerController extends Controller
     public function show(Biller $biller): Response
     {
         abort_if(! $biller->is_active, 404);
+        $biller->load('bills');
         $categories = $this->dropdownService->getCategories();
 
         return Inertia::render('billers/show', [

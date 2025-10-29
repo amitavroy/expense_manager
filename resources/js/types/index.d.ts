@@ -38,6 +38,7 @@ export interface Biller {
     deleted_at: string | null;
     category?: Category;
     user?: User;
+    bills?: Bill[];
 }
 
 export interface BillInstance {

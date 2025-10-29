@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\BillerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -26,6 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('billers', BillerController::class)
         ->except(['edit']);
+
+    Route::resource('bills', BillController::class)
+        ->only(['store', 'update']);
 });
 
 require __DIR__.'/settings.php';
