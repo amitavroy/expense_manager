@@ -43,9 +43,8 @@ export default function BillAddForm({ bill, biller }: BillAddFormProps) {
         biller_id: biller.id,
         default_amount: bill?.default_amount || 0,
         frequency: bill?.frequency || 'monthly',
-        day_of_month: bill?.day_of_month
-            ? new Date(bill.day_of_month).toISOString().split('T')[0]
-            : '',
+        next_payment_date:
+            bill?.next_payment_date || new Date().toISOString().split('T')[0],
         interval_days: bill?.interval_days || 1,
         auto_generate_bill: bill?.auto_generate_bill ?? true,
     });
@@ -151,30 +150,30 @@ export default function BillAddForm({ bill, biller }: BillAddFormProps) {
                                 </FieldContent>
                             </Field>
 
-                            {/* Day of Month */}
+                            {/* Next Payment Date */}
                             <Field>
-                                <FieldLabel htmlFor="day_of_month">
-                                    Day of Month
+                                <FieldLabel htmlFor="next_payment_date">
+                                    Next Payment Date
                                 </FieldLabel>
                                 <FieldContent>
                                     <Input
-                                        id="day_of_month"
+                                        id="next_payment_date"
                                         type="date"
-                                        value={data.day_of_month}
+                                        value={data.next_payment_date}
                                         onChange={(e) =>
                                             setData(
-                                                'day_of_month',
+                                                'next_payment_date',
                                                 e.target.value,
                                             )
                                         }
                                     />
                                     <FieldError
                                         errors={
-                                            errors.day_of_month
+                                            errors.next_payment_date
                                                 ? [
                                                       {
                                                           message:
-                                                              errors.day_of_month,
+                                                              errors.next_payment_date,
                                                       },
                                                   ]
                                                 : undefined

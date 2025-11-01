@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignIdFor(Biller::class)->index();
             $table->decimal('default_amount', 10, 2);
             $table->string('frequency');
-            $table->unsignedTinyInteger('day_of_month')->nullable();
             $table->unsignedTinyInteger('interval_days')->nullable();
             $table->date('next_payment_date');
             $table->boolean('is_active')->default(true);

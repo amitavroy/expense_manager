@@ -27,7 +27,7 @@ class StoreBillRequest extends FormRequest
             'biller_id' => ['required', 'exists:billers,id'],
             'default_amount' => ['required', 'numeric', 'min:0'],
             'frequency' => ['required', Rule::enum(BillFrequencyEnum::class)],
-            'day_of_month' => ['nullable', 'date'],
+            'next_payment_date' => ['required', 'date'],
             'interval_days' => ['nullable', 'integer', 'min:1'],
             'auto_generate_bill' => ['required', 'boolean'],
         ];

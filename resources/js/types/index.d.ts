@@ -7,7 +7,6 @@ export interface Bill {
     biller_id: number;
     default_amount: number;
     frequency: BillFrequency;
-    day_of_month: number | null;
     interval_days: number | null;
     next_payment_date: string;
     is_active: boolean;

@@ -18,7 +18,6 @@ class Bill extends Model
         'biller_id',
         'default_amount',
         'frequency',
-        'day_of_month',
         'interval_days',
         'next_payment_date',
         'is_active',

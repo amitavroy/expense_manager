@@ -132,7 +132,7 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $user->id,
             ],
             [
-                'name' => 'Airtel Inerter',
+                'name' => 'Airtel Internet',
                 'description' => 'Airtel Internet Bill',
                 'category_id' => 4,
                 'user_id' => $user->id,
